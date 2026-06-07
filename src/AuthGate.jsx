@@ -17,6 +17,7 @@ export default function AuthGate({ children }) {
   }, []);
 
   if (session === undefined) return null;
+     return children({ user: { email: "founder@eudai.app" } }); // AUTH DISABLED: open to anyone with the link. Delete this line to restore login.
   if (session) return children(session);
 
   const send = async () => {
@@ -34,6 +35,7 @@ export default function AuthGate({ children }) {
         {sent ? (
           <div style={{ fontSize: 13, lineHeight: 1.5 }}>Check your email — your sign-in link is on the way.</div>
         ) : (
+       
           <>
             <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="founder email"
               onKeyDown={(e) => e.key === "Enter" && send()}
